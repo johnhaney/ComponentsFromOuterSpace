@@ -31,7 +31,7 @@ final class ComponentsFromOuterSpaceTests: XCTestCase {
             entity2.name = "two"
             entity.addChild(entity2)
             let result = entity.findNearest(path: ["one", "two"])
-            XCTAssertEqual(entity2, result)
+            XCTAssertNil(result)
         }
         do {
             let entity = Entity()
@@ -42,7 +42,7 @@ final class ComponentsFromOuterSpaceTests: XCTestCase {
             XCTAssertNil(result)
         }
         do {
-            // Searching is not strict about order. if entities are found in any order, they will be returned
+            // Searching should be strict about order for a path.
             let entity = Entity()
             let entity2 = Entity()
             entity2.name = "two"
@@ -51,7 +51,7 @@ final class ComponentsFromOuterSpaceTests: XCTestCase {
             entity1.name = "one"
             entity2.addChild(entity1)
             let result = entity.findNearest(path: ["one", "two"])
-            XCTAssertEqual(entity2, result)
+            XCTAssertNil(result)
         }
         do {
             let entity = Entity()
@@ -101,7 +101,33 @@ final class ComponentsFromOuterSpaceTests: XCTestCase {
             entity2.name = "two"
             entity1.addChild(entity2)
             
-            // This will find entity1, then go to child entity2, then back up and find entity3
+            let result = entity.findNearest(path: ["one", "two", "three"])
+            XCTAssertNil(result)
+        }
+        do {
+            let entity = Entity()
+            do {
+                let entity1 = Entity()
+                entity1.name = "one"
+                entity.addChild(entity1)
+                let entity2 = Entity()
+                entity2.name = "two"
+                entity1.addChild(entity2)
+            }
+            let entity3 = Entity()
+            do {
+                let entity0 = Entity()
+                entity0.name = "zero"
+                entity.addChild(entity0)
+                let entity1 = Entity()
+                entity1.name = "one"
+                entity0.addChild(entity1)
+                let entity2 = Entity()
+                entity2.name = "two"
+                entity1.addChild(entity2)
+                entity3.name = "three"
+                entity2.addChild(entity3)
+            }
             let result = entity.findNearest(path: ["one", "two", "three"])
             XCTAssertEqual(entity3, result)
         }

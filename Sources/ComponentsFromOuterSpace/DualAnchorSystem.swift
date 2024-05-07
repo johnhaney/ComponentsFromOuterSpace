@@ -54,18 +54,34 @@ extension Entity {
     }
     
     func findNearest(path: [String]) -> Entity? {
+        findNearest(path: path, canBackup: true)
+    }
+    
+    private func findNearest(path: [String], canBackup: Bool) -> Entity? {
         guard let first = path.first
         else { return nil }
-        if let child = self.findEntity(named: first) {
+        let children = self.findEntities(named: first)
+        if !children.isEmpty {
             var subpath = path
             subpath.removeFirst()
             if subpath.isEmpty {
-                return child
+                return children.first
+            } else if let found = children.lazy.compactMap({ $0.findNearest(path: subpath, canBackup: false) }).first {
+                return found
+            } else if canBackup {
+                return parent?.findNearest(path: path, canBackup: false)
             } else {
-                return child.findNearest(path: subpath)
+                return nil
             }
+        } else if canBackup {
+            return parent?.findNearest(path: path, canBackup: false)
         } else {
-            return parent?.findNearest(path: path)
+            return nil
         }
+    }
+    
+    func findEntities(named: String) -> [Entity] {
+        (name == named ? [self] : []) +
+        children.flatMap({ ($0.name == named ? [$0] : []) + $0.findEntities(named: named) })
     }
 }

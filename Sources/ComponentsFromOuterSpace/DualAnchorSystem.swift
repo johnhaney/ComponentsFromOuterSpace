@@ -9,12 +9,12 @@ import RealityKit
 import Spatial
 
 public class DualAnchorSystem: System {
-    static var query = EntityQuery(where: .has(DualAnchorComponent.self))
+    let query = EntityQuery(where: .has(DualAnchorComponent.self))
     
     required public init(scene: Scene) {}
     
     public func update(context: SceneUpdateContext) {
-        for entity in context.entities(matching: DualAnchorSystem.query, updatingSystemWhen: .rendering) {
+        for entity in context.entities(matching: query, updatingSystemWhen: .rendering) {
             guard let component = entity.components[DualAnchorComponent.self]
             else { continue }
             
@@ -43,11 +43,13 @@ public class DualAnchorSystem: System {
     }
 }
 
+@available(macOS 15.0, *)
 fileprivate struct DualAnchorAppliedComponent: Component {
     let bottomPosition: Point3D
     let topPosition: Point3D
 }
 
+@available(macOS 15.0, *)
 extension Entity {
     func findNearest(named: String) -> Entity? {
         return self.findEntity(named: named) ?? parent?.findNearest(named: named)

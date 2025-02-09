@@ -14,10 +14,16 @@ public struct DualAnchorComponent: Component {
     public init(bottomEntityPath: [String], topEntityPath: [String]) {
         self.bottomEntityPath = bottomEntityPath
         self.topEntityPath = topEntityPath
+        Task {
+            await DualAnchorSystem.registerSystem()
+        }
     }
     
     public init(bottomEntityName: String, topEntityName: String) {
         self.bottomEntityPath = [bottomEntityName]
         self.topEntityPath = [topEntityName]
+        Task {
+            await DualAnchorSystem.registerSystem()
+        }
     }
 }

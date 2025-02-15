@@ -5,7 +5,7 @@ Components and Systems for RealityKit's Entity Component System
 Current components:
 * SpawnComponent - Create new Entities repeatedly based on the minInterval, maxInterval you select. Give a non-zero positionExtent to vary their starting location, and choose whether their rotation should be locked to the Entity which the component is placed on. Provide a closure to generate the newly spawned Entity, so you can vary this as you like.
 * FollowComponent - Follow another Entity with a minDistance / maxDistance to allow for the entity to have some variation. Leave the defaults to place at exact same position. Only applies translation, no rotation.
-* DualAnchorComponent - Adjusts the transform of the Entity to make the top and bottom of the Entity fit the two entities you specify. This is particularly interesting when used with anchored entities.
+* DualAnchorComponent - Adjusts the transform of the Entity to make the top and bottom of the Entity fit the two entities you specify.
 
 **SpawnComponent**
 * Spawn new Entities from a randomized location near the Entity's transform at the time.
@@ -45,7 +45,7 @@ public struct FollowComponent: Component {
 ```
 
 **DualAnchorComponent**
-* Given two names or two "paths" to Entities, an Entity with a DualAnchorComponent will be positioned, rotated, and scaled in the one direction along the distance between the two entities. The scale factor assumes a starting height(y) for Entity of 1, so size your Entity accordingly.
+* Given two names or two "paths" to Entities, an Entity with a DualAnchorComponent will be positioned, rotated, and scaled in the one direction along the distance between the two entities. The scale factor assumes a starting height(y) for Entity of 1, so size your Entity accordingly. Your Entity will be stretched (or squished) only on the y-axis, so plan accordingly for a stretchable entity (cylinders work really well for this).
 
 If you map an ARKit HandSkeleton to entities in your scene, then you can create an entity which stretches between the joints to create a skeleton-style visualization.
 

@@ -8,6 +8,7 @@ let package = Package(
     platforms: [
         .visionOS(.v2),
         .macOS(.v15),
+        .iOS(.v18),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.

@@ -6,6 +6,7 @@ Current components:
 * SpawnComponent - Create new Entities repeatedly based on the minInterval, maxInterval you select. Give a non-zero positionExtent to vary their starting location, and choose whether their rotation should be locked to the Entity which the component is placed on. Provide a closure to generate the newly spawned Entity, so you can vary this as you like.
 * FollowComponent - Follow another Entity with a minDistance / maxDistance to allow for the entity to have some variation. Leave the defaults to place at exact same position. Only applies translation, no rotation.
 * DualAnchorComponent - Adjusts the transform of the Entity to make the top and bottom of the Entity fit the two entities you specify.
+* TripleAnchorComponent - Adjusts the transform of the Entity to match as best as possible the top-left, top-right, and bottom-right locations of the entities you specify.
 
 **SpawnComponent**
 * Spawn new Entities from a randomized location near the Entity's transform at the time.
@@ -56,3 +57,7 @@ handSkeletonBone.components.set(DualAnchorComponent(
                                 topEntityPath: ["leftHand", "littleFingerIntermediateTip"]
 ))
 ```
+
+**TripleAnchorComponent**
+* Given three names for Entities, an Entity with a TripleAnchorComponent will be positioned, rotated, and xy-scaled to fit the three entities. The scale factor assumes a starting width(x) and height(y) for Entity of 1, so size your Entity accordingly. Your Entity will be stretched (or squished) on the x-axis and y-axis, so plan accordingly for a stretchable entity.
+

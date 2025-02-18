@@ -8,20 +8,12 @@
 import RealityKit
 
 public struct DualAnchorComponent: Component {
-    public let bottomEntityPath: [String]
-    public let topEntityPath: [String]
+    public let bottomEntity: Entity
+    public let topEntity: Entity
     
-    public init(bottomEntityPath: [String], topEntityPath: [String]) {
-        self.bottomEntityPath = bottomEntityPath
-        self.topEntityPath = topEntityPath
-        Task {
-            await DualAnchorSystem.registerSystem()
-        }
-    }
-    
-    public init(bottomEntityName: String, topEntityName: String) {
-        self.bottomEntityPath = [bottomEntityName]
-        self.topEntityPath = [topEntityName]
+    public init(bottomEntity: Entity, topEntity: Entity) {
+        self.bottomEntity = bottomEntity
+        self.topEntity = topEntity
         Task {
             await DualAnchorSystem.registerSystem()
         }

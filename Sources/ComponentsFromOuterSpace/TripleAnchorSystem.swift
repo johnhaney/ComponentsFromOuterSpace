@@ -23,15 +23,10 @@ public class TripleAnchorSystem: System {
     }
     
     @MainActor
-    func anchorCorners(_ entity: Entity, _ topLeftPath: [String], _ topRightPath: [String], _ bottomRightPath: [String]) {
-        guard let bottomRight = entity.findNearest(path: bottomRightPath),
-              let topRight = entity.findNearest(path: topRightPath),
-              let top = entity.findNearest(path: topLeftPath)
-        else { return }
-        
+    func anchorCorners(_ entity: Entity, _ topLeft: Entity, _ topRight: Entity, _ bottomRight: Entity) {
         let bottomRightPosition = Point3D(bottomRight.position(relativeTo: entity.parent))
         let topRightPosition = Point3D(topRight.position(relativeTo: entity.parent))
-        let topLeftPosition = Point3D(top.position(relativeTo: entity.parent))
+        let topLeftPosition = Point3D(topLeft.position(relativeTo: entity.parent))
 
         let applied: TripleAnchorAppliedComponent
         if let existingApplied = entity.components[TripleAnchorAppliedComponent.self],

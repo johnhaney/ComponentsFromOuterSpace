@@ -8,14 +8,14 @@
 import RealityKit
 
 public struct TripleAnchorComponent: Component {
-    public let topLeft: [String]
-    public let topRight: [String]
-    public let bottomRight: [String]
+    public let topLeft: Entity
+    public let topRight: Entity
+    public let bottomRight: Entity
     
-    public init(topLeftEntityName: String, topRightEntityName: String, bottomRightEntityName: String) {
-        self.topLeft = [topLeftEntityName]
-        self.topRight = [topRightEntityName]
-        self.bottomRight = [bottomRightEntityName]
+    public init(topLeftEntity: Entity, topRightEntity: Entity, bottomRightEntity: Entity) {
+        self.topLeft = topLeftEntity
+        self.topRight = topRightEntity
+        self.bottomRight = bottomRightEntity
         Task {
             await TripleAnchorSystem.registerSystem()
         }

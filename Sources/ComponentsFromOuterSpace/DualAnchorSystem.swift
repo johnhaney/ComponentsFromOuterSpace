@@ -18,9 +18,8 @@ public class DualAnchorSystem: System {
             guard let component = entity.components[DualAnchorComponent.self]
             else { continue }
             
-            guard let bottom = entity.findNearest(path: component.bottomEntityPath),
-                  let top = entity.findNearest(path: component.topEntityPath)
-            else { continue }
+            let bottom = component.bottomEntity
+            let top = component.topEntity
             
             let bottomPosition = Point3D(bottom.position(relativeTo: entity.parent))
             let topPosition = Point3D(top.position(relativeTo: entity.parent))

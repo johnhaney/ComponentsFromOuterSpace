@@ -7,6 +7,7 @@ Current components:
 * FollowComponent - Follow another Entity with a minDistance / maxDistance to allow for the entity to have some variation. Leave the defaults to place at exact same position. Only applies translation, no rotation.
 * DualAnchorComponent - Adjusts the transform of the Entity to make the top and bottom of the Entity fit the two entities you specify.
 * TripleAnchorComponent - Adjusts the transform of the Entity to match as best as possible the top-left, top-right, and bottom-right locations of the entities you specify.
+* PatrolComponent - Adjusts the rotation and translation of the Entity to move to specified translation coordinates along the route you specify at the speed you specify.
 
 **SpawnComponent**
 * Spawn new Entities from a randomized location near the Entity's transform at the time.
@@ -61,3 +62,8 @@ handSkeletonBone.components.set(DualAnchorComponent(
 **TripleAnchorComponent**
 * Given three names for Entities, an Entity with a TripleAnchorComponent will be positioned, rotated, and xy-scaled to fit the three entities. The scale factor assumes a starting width(x) and height(y) for Entity of 1, so size your Entity accordingly. Your Entity will be stretched (or squished) on the x-axis and y-axis, so plan accordingly for a stretchable entity.
 
+**PatrolComponent**
+* Given a route (array of SIMD3<Float> positions) and a speed (Float in meters per second) the rotation and translation of the Entity will be updated to to move to next specified route position at the speed given. 
+* If you have physics enabled, this can create some bouncing as gravity will still take effect.
+* Rotation will be around the y-axis to point the entity in the xz-direction toward it's current goal.
+* Note: This patrol algorithm does NOT account for any collisions or path-finding, it will move directly in the direction of the next goal position. 

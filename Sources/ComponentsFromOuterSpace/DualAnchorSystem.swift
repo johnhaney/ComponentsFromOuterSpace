@@ -21,8 +21,15 @@ public class DualAnchorSystem: System {
             let bottom = component.bottomEntity
             let top = component.topEntity
             
-            let bottomPosition = Point3D(bottom.position(relativeTo: entity.parent))
-            let topPosition = Point3D(top.position(relativeTo: entity.parent))
+            let bottomPosition: Point3D
+            let topPosition: Point3D
+            if let parent = entity.parent {
+                bottomPosition = Point3D(bottom.position(relativeTo: parent))
+                topPosition = Point3D(top.position(relativeTo: parent))
+            } else {
+                bottomPosition = Point3D(bottom.position)
+                topPosition = Point3D(top.position)
+            }
             
             let applied: DualAnchorAppliedComponent
             if let existingApplied = entity.components[DualAnchorAppliedComponent.self],

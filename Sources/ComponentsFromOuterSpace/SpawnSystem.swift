@@ -5,10 +5,12 @@
 //  Created by John Haney on 2/4/25.
 //
 
+#if canImport(RealityKit)
 import Foundation
 import RealityKit
 import Spatial
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 class SpawnSystem: System {
     let spawnpoints = EntityQuery(where: .has(SpawnComponent.self))
     
@@ -64,9 +66,10 @@ class SpawnSystem: System {
     }
 }
 
-@available(macOS 15.0, *)
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 extension Transform {
     init(_ pose: Pose3D) {
         self.init(matrix: simd_float4x4(pose))
     }
 }
+#endif

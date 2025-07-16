@@ -5,9 +5,11 @@
 //  Created by John Haney on 3/22/25.
 //
 
+#if canImport(RealityKit)
 import Foundation
 import RealityKit
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 public struct PatrolComponent: Component {
     public let route: [SIMD3<Float>]
     public let speed: Float // meters per second
@@ -21,6 +23,7 @@ public struct PatrolComponent: Component {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 public struct PatrolSystem: System {
     let assigned = EntityQuery(where: .has(PatrolComponent.self))
     
@@ -64,8 +67,10 @@ public struct PatrolSystem: System {
     }
 }
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 extension PatrolSystem.PatrollingComponent {
     func nextTarget(_ count: Int) -> Self {
         Self(target: (target + 1) % count)
     }
 }
+#endif

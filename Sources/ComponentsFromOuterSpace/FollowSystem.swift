@@ -5,10 +5,12 @@
 //  Created by John Haney on 2/4/25.
 //
 
+#if canImport(RealityKit)
 import Foundation
 import RealityKit
 import Spatial
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 class FollowSystem: System {
     let followers = EntityQuery(where: .has(FollowComponent.self))
     required init(scene: Scene) {
@@ -46,3 +48,4 @@ class FollowSystem: System {
         }
     }
 }
+#endif

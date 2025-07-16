@@ -5,9 +5,11 @@
 //  Created by John Haney on 2/16/25.
 //
 
+#if canImport(RealityKit)
 import RealityKit
 import Spatial
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 public class TripleAnchorSystem: System {
     let query = EntityQuery(where: .has(TripleAnchorComponent.self))
     
@@ -61,3 +63,4 @@ fileprivate struct TripleAnchorAppliedComponent: Component {
     let topLeftPosition: Point3D?
     let topRightPosition: Point3D?
 }
+#endif

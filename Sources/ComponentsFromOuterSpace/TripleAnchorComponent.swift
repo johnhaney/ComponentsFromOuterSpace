@@ -5,8 +5,10 @@
 //  Created by John Haney on 2/16/25.
 //
 
+#if canImport(RealityKit)
 import RealityKit
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 public struct TripleAnchorComponent: Component {
     public let topLeft: Entity
     public let topRight: Entity
@@ -21,3 +23,4 @@ public struct TripleAnchorComponent: Component {
         }
     }
 }
+#endif

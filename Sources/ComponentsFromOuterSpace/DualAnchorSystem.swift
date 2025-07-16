@@ -5,9 +5,11 @@
 //  Created by John Haney on 4/24/24.
 //
 
+#if canImport(RealityKit)
 import RealityKit
 import Spatial
 
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 public class DualAnchorSystem: System {
     let query = EntityQuery(where: .has(DualAnchorComponent.self))
     
@@ -49,8 +51,9 @@ public class DualAnchorSystem: System {
     }
 }
 
-@available(macOS 15.0, *)
+@available(macOS 15.0, tvOS 26.0, *)
 fileprivate struct DualAnchorAppliedComponent: Component {
     let bottomPosition: Point3D
     let topPosition: Point3D
 }
+#endif

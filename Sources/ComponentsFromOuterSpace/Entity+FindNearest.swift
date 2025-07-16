@@ -5,9 +5,10 @@
 //  Created by John Haney on 2/16/25.
 //
 
+#if canImport(RealityKit)
 import RealityKit
 
-@available(macOS 15.0, *)
+@available(iOS 18.0, macOS 15.0, tvOS 26.0, *)
 extension Entity {
     func findNearest(named: String) -> Entity? {
         return self.findEntity(named: named) ?? parent?.findNearest(named: named)
@@ -45,5 +46,4 @@ extension Entity {
         children.flatMap({ ($0.name == named ? [$0] : []) + $0.findEntities(named: named) })
     }
 }
-
-
+#endif
